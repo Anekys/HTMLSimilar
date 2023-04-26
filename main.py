@@ -8,6 +8,7 @@ def get_dom_tree(html: str):
     res = traverse(dom)
     return res
 
+
 # 遍历dom树
 def traverse(node):
     string = ''
@@ -26,12 +27,14 @@ def traverse(node):
                 string += f"<{p.tag}></{p.tag}>"
     return string
 
+
 # 计算汉明距离
 def hamming_distance(str1, str2):
     diff = 0
     for ch1, ch2 in zip(str1, str2):
         diff += bin(ord(ch1) ^ ord(ch2)).count('1')
     return diff
+
 
 def compare_tree_structure(tree1, tree2):
     """比较两个dom树的相似度"""
@@ -42,8 +45,9 @@ def compare_tree_structure(tree1, tree2):
 
 
 if __name__ == '__main__':
-    raw = requests.get("https://beyoglueye.com/jvi.aspx?pdir=beyoglu&plng=eng&list=pub")
+    raw = requests.get("https://www.sogou.com/")
     tree1 = get_dom_tree(raw.text)
     raw = requests.get("https://www.baidu.com/")
     tree2 = get_dom_tree(raw.text)
-    compare_tree_structure(tree1,tree2)
+    score = compare_tree_structure(tree1, tree2)
+    print(f"相似度为 {score:.2}")
